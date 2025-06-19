@@ -20,13 +20,21 @@ Esta é uma API RESTful construída com Laravel para autenticação de usuários
 
 ```bash
     git clone https://github.com/marcoantn020/manager-movie-backend.git
+    
     cd manager-movie-backend
+    
     docker-compose up -d
+    
     docker-compose exec app zsh
+    
     composer install
+    
     cp .env.example .env
+    
     php artisan key:generate
+    
     php artisan migrate --seed
+    
     php artisan storage:link
 ```
 ---
@@ -42,6 +50,7 @@ Authorization: Bearer {token}
 ---
 
 ## 📚 Endpoints
+#### http://localhost:8000/api
 
 ### ✅ Health Check
 `GET /`
@@ -101,19 +110,6 @@ http://localhost:8000/storage/user_images/{nome_da_imagem}
 ```
 
 ---
-
----
-
-## 🧪 Testes 
-##### ⚠️ Necessário criar o banco app_test, veja como mais abaixo
-
-```bash
-  ./vendor/bin/pest
-  ou 
-  php artisan test
-```
-
----
 ## 🔐 Acesso ao phpMyAdmin
 
 - **URL de acesso**: [http://localhost:8080](http://localhost:8080)
@@ -133,10 +129,56 @@ CREATE DATABASE app_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 Pronto! O banco de dados `app_test` estará criado e disponível para uso.
 
+---
+##  🧪 Testes
+#### ⚠️ Necessário criar o banco app_test, veja como mais abaixo
+
+```bash
+  php artisan migrate:fresh --env=testing
+
+  php artisan test
+```
+
 ### ⚠️ Observações
 
-- Certifique-se de que os contêineres do MySQL e do phpMyAdmin estão rodando corretamente.
+- Certifique-se de que os contêineres estão rodando corretamente.
 ---
+
+## Importando as Rotas da API no Postman
+
+Este guia explica como importar o arquivo de coleções do Postman com as rotas da sua API.
+
+### 📥 Passo a Passo para Importar
+
+1. **Abra o Postman** (versão desktop ou web).
+2. No menu lateral esquerdo, clique em **"Collections"**.
+3. Clique no botão **"Import"** (ou no ícone de "+" com seta).
+4. Selecione a aba **"Upload Files"**.
+5. **Localize e selecione o arquivo JSON** `api_manager_movies.json` que está na raiz do projeto.
+6. Clique em **"Import"**.
+
+Pronto! Agora você verá todas as rotas organizadas dentro do Postman, prontas para uso.
+
+---
+
+### 📌 Não Esqueça
+
+- Configure a variável `{{base_url}}` com `http://localhost:8000/api`.
+- Configure a variável `{{token}}`.
+
+---
+
+Use nas rotas do Postman como:
+
+```
+{{base_url}}/login
+{{base_url}}/movies
+```
+
+---
+
+Boas requisições! 🚀
+
 
 ## 🧾 Licença
 
